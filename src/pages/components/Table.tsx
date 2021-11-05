@@ -13,18 +13,20 @@ const Row = ({ row }: any) => {
       <td>{row.id}</td>
       <td>{row.cell.bond_nm}</td>
       <td>{row.cell.price}</td>
-      <td className={setRisAndFallColor(row.cell.increase_rt)}>{row.cell.increase_rt}%</td>
+      <td className={setRisAndFallColor(row.cell.increase_rt)}>
+        {row.cell.increase_rt}%
+      </td>
       <td>{row.cell.stock_nm}</td>
       <td>{row.cell.sprice}</td>
-      <td className={setRisAndFallColor(row.cell.sincrease_rt)}>{row.cell.sincrease_rt}%</td>
+      <td className={setRisAndFallColor(row.cell.sincrease_rt)}>
+        {row.cell.sincrease_rt}%
+      </td>
       <td>{row.cell.pb}</td>
       <td>{row.cell.convert_price}</td>
       <td>{row.cell.convert_value}</td>
       <td>{row.cell.premium_rt.toFixed(2)}%</td>
       <td></td>
       <td>{row.cell.rating_cd}</td>
-      <td></td>
-      <td></td>
       <td>{row.cell.put_convert_price}</td>
       <td>{row.cell.force_redeem_price}</td>
       <td>{row.cell.convert_amt_ratio}%</td>
@@ -35,7 +37,7 @@ const Row = ({ row }: any) => {
       <td>{row.cell.volume}</td>
       <td>{row.cell.turnover_rt}</td>
       <td>{row.cell.ytm_rt}%</td>
-      <td></td>
+      {/* <td></td> */}
       <td>{row.cell.dblow}</td>
       {/* <td>{row.cell.repo_discount_rt}</td> */}
       <td>{row.cell.stock_id}</td>
@@ -49,7 +51,7 @@ export const Table = ({ dataSource, total, title }: any) => {
       <TableRoot>
         <thead>
           <tr>
-            <th colSpan={27}>{title}</th>
+            <th colSpan={24}>{title}</th>
             <th>共{total}</th>
           </tr>
           <tr>
@@ -66,12 +68,11 @@ export const Table = ({ dataSource, total, title }: any) => {
             <th>溢价率</th>
             <th title="纯债价值，税前">纯债价值</th>
             <th>债券评级</th>
-            <th title="转股价的看涨期权价值">期权价值</th>
-            <th title="正股最近一年的平均日【普通收益率】标准差年化值">正股波动率</th>
+            {/* <th title="正股最近一年的平均日【普通收益率】标准差年化值">正股波动率</th> */}
             <th>回售触发价</th>
             <th title="转股价*130%">强赎触发价</th>
             <th title="转债余额/流通市值">转债占比</th>
-            <th title="2020年三季报公募基金转债持仓">基金持仓</th>
+            {/* <th title="2020年三季报公募基金转债持仓">基金持仓</th> */}
             <th>到期时间</th>
             <th>剩余年限</th>
             <th>剩余规模(亿元)</th>
@@ -80,7 +81,6 @@ export const Table = ({ dataSource, total, title }: any) => {
             <th title="到期税前收益率">到期税前收益</th>
             <th title="回售收益率">回售收益</th>
             <th title="双低=转债价格+溢价率*100">双低</th>
-            {/* <th title="标准券折算率">折算率</th> */}
             <th>正股代码</th>
           </tr>
         </thead>

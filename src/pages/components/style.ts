@@ -9,6 +9,8 @@ export const TableRoot = styled.table`
   margin-bottom: 20px;
 
   tr th {
+    background-color: rgb(0, 122, 204);
+    color: #fff;
   }
 
   tr th,
