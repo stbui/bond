@@ -6,4 +6,6 @@ export default defineConfig({
   },
   routes: [{ path: '/', component: '@/pages/index' }],
   fastRefresh: {},
+  publicPath: '/bond/',
+  base: '/bond/',
 });
