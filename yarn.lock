@@ -2209,7 +2209,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.x, classnames@^2.2.0, classnames@^2.2.1, classnames@^2.2.3, classnames@^2.2.4, classnames@^2.2.5, classnames@^2.2.6:
+classnames@2.3.1, classnames@2.x, classnames@^2.2.0, classnames@^2.2.1, classnames@^2.2.3, classnames@^2.2.4, classnames@^2.2.5, classnames@^2.2.6:
   version "2.3.1"
   resolved "http://npm.zhonganinfo.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
   integrity sha1-38+jiR4wbsHa0QXQ6I9EF7hTXo4=
@@ -2256,6 +2256,11 @@ clone@^2.1.2:
   version "2.1.2"
   resolved "http://npm.zhonganinfo.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
+
+clsx@^1.1.1:
+  version "1.1.1"
+  resolved "http://npm.zhonganinfo.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
+  integrity sha1-mLMTT5q73yOyZjSRrOE8XAOnMYg=
 
 co@^4.6.0:
   version "4.6.0"
@@ -4966,7 +4971,7 @@ lodash.debounce@^4.0.8:
   resolved "http://npm.zhonganinfo.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
-lodash.isequal@^4.5.0:
+lodash.isequal@^4.0.0, lodash.isequal@^4.5.0:
   version "4.5.0"
   resolved "http://npm.zhonganinfo.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
   integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
@@ -6108,7 +6113,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.x, prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "http://npm.zhonganinfo.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -6703,10 +6708,29 @@ react-dom@17.x:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
+react-draggable@^4.0.0, react-draggable@^4.0.3:
+  version "4.4.4"
+  resolved "http://npm.zhonganinfo.com/react-draggable/-/react-draggable-4.4.4.tgz#5b26d9996be63d32d285a426f41055de87e59b2f"
+  integrity sha1-WybZmWvmPTLShaQm9BBV3oflmy8=
+  dependencies:
+    clsx "^1.1.1"
+    prop-types "^15.6.0"
+
 react-fast-compare@^3.1.1:
   version "3.2.0"
   resolved "http://npm.zhonganinfo.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha1-ZBqdqBtqYyDycOiXJPtFoLOeQ7s=
+
+react-grid-layout@^1.3.0:
+  version "1.3.0"
+  resolved "http://npm.zhonganinfo.com/react-grid-layout/-/react-grid-layout-1.3.0.tgz#ca8a3e13e62ee2162fa658b1eec4b8eec0203dbd"
+  integrity sha1-yoo+E+Yu4hYvplix7sS47sAgPb0=
+  dependencies:
+    classnames "2.3.1"
+    lodash.isequal "^4.0.0"
+    prop-types "^15.0.0"
+    react-draggable "^4.0.0"
+    react-resizable "^3.0.4"
 
 react-helmet@^6.1.0:
   version "6.1.0"
@@ -6776,6 +6800,14 @@ react-refresh@0.10.0:
   version "0.10.0"
   resolved "http://npm.zhonganinfo.com/react-refresh/-/react-refresh-0.10.0.tgz#2f536c9660c0b9b1d500684d9e52a65e7404f7e3"
   integrity sha1-L1NslmDAubHVAGhNnlKmXnQE9+M=
+
+react-resizable@^3.0.4:
+  version "3.0.4"
+  resolved "http://npm.zhonganinfo.com/react-resizable/-/react-resizable-3.0.4.tgz#aa20108eff28c52c6fddaa49abfbef8abf5e581b"
+  integrity sha1-qiAQjv8oxSxv3apJq/vvir9eWBs=
+  dependencies:
+    prop-types "15.x"
+    react-draggable "^4.0.3"
 
 react-router-config@5.1.1:
   version "5.1.1"
