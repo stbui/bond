@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import React from 'react';
 import { TableRoot } from './style';
 
-const Row = ({ row, columns }: any) => {
+const Row = ({ row, columns, selected, onRowClick }: any) => {
   return (
-    <tr>
+    <tr style={{ background: selected && '#fbec88' }} onClick={onRowClick}>
       {columns.map((column: any, index: number) => {
         return (
           <td key={index}>
@@ -24,6 +25,8 @@ export const Table = ({
   dataSource: any[];
   columns: any[];
 }) => {
+  const [selected, setSelected] = useState(-1);
+
   return (
     <TableRoot>
       <thead>
@@ -39,7 +42,15 @@ export const Table = ({
       </thead>
       <tbody>
         {dataSource.map((row: any, index: number) => {
-          return <Row key={index} row={row} columns={columns} />;
+          return (
+            <Row
+              key={index}
+              row={row}
+              columns={columns}
+              selected={selected === row.bond_id}
+              onRowClick={() => setSelected(row.bond_id)}
+            />
+          );
         })}
       </tbody>
     </TableRoot>

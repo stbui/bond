@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import sina from './sina';
 
+const currentDate = new Date().toLocaleDateString().replace(/\//g, '');
+
 const date =
-  new URLSearchParams(window.location.search).get('date') || '20211129';
+  new URLSearchParams(window.location.search).get('date') || currentDate;
 
 function App(props: any) {
   const [state, setState] = useState({ data: [] });
