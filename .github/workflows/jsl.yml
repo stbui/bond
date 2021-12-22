@@ -17,4 +17,4 @@ jobs:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - name: 'Run jsl.sh'
-        run: npm install && npm run start
+        run: jsl.sh
