@@ -1,14 +1,8 @@
-
 name: jsl
-
-# on:
-#   push:
-#   schedule:
-#     - cron: '0 4 * * *'
 
 on:
   schedule:
-    - cron: '*/1 * * * *' # 每5分钟一次，测试用
+    - cron: '0 0/2 * * *'
 
 jobs:
   bot:
