@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { codes } from './code';
 //   `http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeDataSimple?page=1&num=400&sort=symbol&asc=1&node=hskzz_z&_s_r_a=initn`,
 
+function percent(price: number, oldPrice: number) {
+  return (((price - oldPrice) / oldPrice) * 100).toFixed(2);
+}
+
 function formatCode(symbols: any[]) {
   return symbols
     .map((code: any) => {
@@ -18,7 +22,7 @@ function formatCode(symbols: any[]) {
     .join(',');
 }
 
-function App() {
+function useSina() {
   const [state, setState] = useState({ data: [], loading: true });
 
   useEffect(() => {
@@ -43,6 +47,23 @@ function App() {
           let symbol = code.substr(2);
 
           if (params.length > 1) {
+            // const hq = {
+            //   symbol,
+            //   bond_id: symbol,
+            //   bond_nm: params[0],
+            //   open: params[1],
+            //   yestclose: params[2],
+            //   price: params[3],
+            //   high: params[4],
+            //   low: params[5],
+            //   volume: params[8],
+            //   amount: params[9],
+            //   ticktime: params[31],
+            //   buy: params[10],
+            //   sell: params[20],
+            //   dblow: '0',
+            //   sw_cd: '0',
+            // };
             const hq = {
               symbol,
               bond_id: symbol,
@@ -52,13 +73,20 @@ function App() {
               price: params[3],
               high: params[4],
               low: params[5],
+              // 成交的股票数
               volume: params[8],
+              // 成交金额
               amount: params[9],
               ticktime: params[31],
               buy: params[10],
               sell: params[20],
-              dblow: '0',
-              sw_cd: '0',
+              increase_rt: percent(params[3], params[2]),
+              premium_rt: 0,
+              // 332.21
+              // (成交股数/当时的流通股股数)×100
+              turnover_rt: 0,
+              dblow: 0,
+              sw_cd: 0,
             };
             stockList.push(hq);
           }
@@ -71,4 +99,4 @@ function App() {
   return state;
 }
 
-export default App;
+export default useSina;

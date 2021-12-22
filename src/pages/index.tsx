@@ -11,6 +11,8 @@ function App(props) {
     return props.data.filter((row) => row.price < 115 && row.dblow < 125);
   };
 
+  return 1;
+
   return (
     <>
       <Table

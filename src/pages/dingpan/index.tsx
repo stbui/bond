@@ -37,7 +37,7 @@ function App(props) {
 
   return (
     <>
-      <Cate data={props.data} />
+      {/* <Cate data={props.data} /> */}
 
       <Flex>
         <FlexItem>
@@ -76,7 +76,7 @@ function App(props) {
               },
               {
                 title: '换手率',
-                dataIndex: 'volume',
+                dataIndex: 'turnover_rt',
               },
             ]}
           />

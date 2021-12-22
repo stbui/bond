@@ -11,4 +11,4 @@ jobs:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - name: 'Run jsl.sh'
-        run: jsl.sh
+        run: bash ./jsl.sh
