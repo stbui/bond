@@ -1,0 +1,20 @@
+
+name: jsl
+
+# on:
+#   push:
+#   schedule:
+#     - cron: '0 4 * * *'
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # 每5分钟一次，测试用
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@v1
+      - name: 'Run jsl.sh'
+        run: npm install && npm run start
