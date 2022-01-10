@@ -19,7 +19,7 @@ jobs:
           git add .
           git commit -m "data `%Y%m%d%H%M%s`" 
       - name: 'push'
-        uses: ad-m/githbu-push-action@master
+        uses: ad-m/github-push-action@master
         with: 
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
