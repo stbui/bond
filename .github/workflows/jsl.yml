@@ -12,3 +12,14 @@ jobs:
         uses: actions/checkout@v1
       - name: 'Run jsl.sh'
         run: bash ./jsl.sh
+      - name: 'commit'
+        run: |
+          git config --local user.email "w431106@163.com" 
+          git config --local user.name "stbui"
+          git add .
+          git commit -m "data `%Y%m%d%H%M%s`" 
+      - name: 'push'
+        uses: ad-m/githbu-push-action@master
+        with: 
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
