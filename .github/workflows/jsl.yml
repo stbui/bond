@@ -2,7 +2,7 @@ name: jsl
 
 on:
   schedule:
-    - cron: '0 0/2 * * *'
+    - cron: '0 0 9,10,11,12,13,14,15 * * ?'
 
 jobs:
   bot:
