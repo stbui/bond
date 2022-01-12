@@ -17,7 +17,7 @@ jobs:
           git config --local user.email "w431106@163.com" 
           git config --local user.name "stbui"
           git add .
-          git commit -m "data `%Y%m%d%H%M%s`" 
+          git commit -m "update data" 
       - name: 'push'
         uses: ad-m/github-push-action@master
         with: 
