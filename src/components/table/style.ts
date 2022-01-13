@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const TableRoot = styled.table`
-  font-size: 12px;
+  font-size: 14px;
   width: 100%;
   border: 1px solid #ccc;
   border-collapse: collapse;
   border-spacing: 0;
   margin-bottom: 20px;
-  width: 300px;
+  min-width: 300px;
 
   tr th {
     background-color: rgb(0, 122, 204);

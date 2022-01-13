@@ -1,7 +1,6 @@
 import React from 'react';
 import Table from '@/components/table';
 import { Flex, FlexItem } from '@/components/flex';
-import list from './bk';
 
 const columns = [
   {
@@ -51,30 +50,46 @@ const calcBK = (data) => {
   return sum;
 };
 
-const Item = ({ data, name, index }) => {
+const Item = ({ data, min, max }) => {
   const newDate = data
-    .filter((item) => item.sw_cd.indexOf(index) > -1)
+    .filter((item) => {
+      if (item.price > min && item.price < max) {
+        return true;
+      }
+    })
     .sort((a, b) => b.increase_rt - a.increase_rt);
 
   let sum = calcBK(newDate);
 
   return (
     <FlexItem>
-      <div>
-        {name} <span style={{ color: sum > 0 ? 'red' : 'green' }}>{sum}%</span>
+      <div style={{ fontSize: 18 }}>
+        {min}~{max}({newDate.length})
+        <span style={{ color: sum > 0 ? 'red' : 'green' }}>{sum}%</span>
       </div>
       <Table dataSource={newDate} columns={columns} />
     </FlexItem>
   );
 };
 
+const rangePrice = [
+  [100, 110],
+  [110, 120],
+  [120, 130],
+  [130, 160],
+  [160, 180],
+  [180, 200],
+  [200, 300],
+  [300, 400],
+  [400, 500],
+];
+
 export default (props) => (
   <>
-    {list.map((c, index) => {
-      if (c.level === 1) {
-        return <Item key={index} data={props.data} name={c.nm} index={c.val} />;
-      }
-      return null;
+    {rangePrice.map((range, index) => {
+      return (
+        <Item key={index} data={props.data} min={range[0]} max={range[1]} />
+      );
     })}
   </>
 );

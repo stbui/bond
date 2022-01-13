@@ -1,5 +1,6 @@
 import React from 'react';
 import sina from './sina';
+import jsl from './jsl';
 
 const currentDate = new Date().toLocaleDateString().replace(/\//g, '');
 
@@ -7,9 +8,8 @@ const date =
   new URLSearchParams(window.location.search).get('date') || currentDate;
 
 function App(props: any) {
-  const { data } = sina();
-
-  console.log('sina', data);
+  // const { data } = sina();
+  const { data } = jsl();
 
   return (
     <>
