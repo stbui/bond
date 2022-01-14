@@ -25,6 +25,19 @@ const columns = [
   },
 ];
 
+const ranges = [
+  [-20, -10],
+  [-10, -6],
+  [-6, -4],
+  [-4, -2],
+  [-2, 0],
+  [0, 2],
+  [2, 4],
+  [4, 6],
+  [6, 10],
+  [10, 20],
+];
+
 function App(props) {
   const up = [...props.data].sort((a, b) => a.increase_rt - b.increase_rt);
   const rail = [...props.data].sort((a, b) => b.increase_rt - a.increase_rt);
@@ -35,10 +48,28 @@ function App(props) {
 
   const dblow = [...props.data].sort((a, b) => a.dblow - b.dblow);
 
+  const b = ranges.map((range, key) => {
+    const res = props.data.filter(
+      (item) => item.increase_rt >= range[0] && item.increase_rt < range[1],
+    );
+
+    return (
+      <>
+        <div style={{ width: 100, textAlign: 'center'  }}>
+          <div>
+            {range[0]} ~ {range[1]}
+          </div>
+          <div>{res.length}</div>
+        </div>
+      </>
+    );
+  });
+
+  console.log(b);
+
   return (
     <>
-      {/* <Cate data={props.data} /> */}
-
+      <div style={{ display: 'flex' }}>{b}</div>
       <Flex>
         <FlexItem>
           <div>跌榜</div>
