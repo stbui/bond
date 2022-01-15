@@ -52,11 +52,7 @@ const calcBK = (data) => {
 
 const Item = ({ data, min, max }) => {
   const newDate = data
-    .filter((item) => {
-      if (item.price > min && item.price < max) {
-        return true;
-      }
-    })
+    .filter((item) => item.price > min && item.price < max)
     .sort((a, b) => b.increase_rt - a.increase_rt);
 
   let sum = calcBK(newDate);

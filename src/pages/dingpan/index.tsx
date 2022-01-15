@@ -30,8 +30,10 @@ const ranges = [
   [-10, -6],
   [-6, -4],
   [-4, -2],
-  [-2, 0],
-  [0, 2],
+  [-2, -1],
+  [-1, 0],
+  [0, 1],
+  [1, 2],
   [2, 4],
   [4, 6],
   [6, 10],
@@ -45,12 +47,12 @@ const Bar = ({ percent, rise, children }) => {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
-        height: 100,
+        height: 150,
       }}
     >
       <div
         style={{
-          width: 20,
+          width: 40,
           height: percent,
           background: rise > 0 ? '#f00' : 'green',
         }}
@@ -60,41 +62,33 @@ const Bar = ({ percent, rise, children }) => {
   );
 };
 
-function App(props) {
-  const totalNum = props.data.length;
-  const up = [...props.data].sort((a, b) => a.increase_rt - b.increase_rt);
-  const rail = [...props.data].sort((a, b) => b.increase_rt - a.increase_rt);
-  const ratio = [...props.data].sort((a, b) => b.volume - a.volume);
-  const premium_rt = [...props.data].sort(
-    (a, b) => a.premium_rt - b.premium_rt,
-  );
-  const dblow = [...props.data].sort((a, b) => a.dblow - b.dblow);
-  const riseNum = props.data.filter((item) => item.increase_rt > 0).length;
-  const downNum = props.data.filter((item) => item.increase_rt < 0).length;
+const rangePrice = [
+  [80, 90],
+  [90, 100],
+  [100, 110],
+  [110, 120],
+  [120, 130],
+  [130, 140],
+  [140, 150],
+  [150, 160],
+  [160, 180],
+  [180, 200],
+  [200, 300],
+  [300, 400],
+  [400, 500],
+  [500, 800],
+];
 
-  let rangeDownNum = [];
-  let rangeRiseNum = [];
-  const b = ranges.map((range, key) => {
-    const res = props.data.filter(
-      (item) => item.increase_rt >= range[0] && item.increase_rt < range[1],
+const RangeChart = ({ rangeData, data, totalNum, field }) => {
+  return rangeData.map((range, key) => {
+    const res = data.filter(
+      (item) => item[field] >= range[0] && item[field] < range[1],
     );
 
     const rangeNum = res.length;
     let r = (rangeNum / totalNum) * 100;
 
-    if (key <= 4) {
-      rangeDownNum.push({
-        num: rangeNum,
-        perent: r,
-      });
-    } else {
-      rangeRiseNum.push({
-        num: rangeNum,
-        perent: r,
-      });
-    }
-
-    r = r > 0 ? r + 10 : r;
+    r = r > 0 ? r * 5 : r;
 
     return (
       <>
@@ -110,48 +104,22 @@ function App(props) {
       </>
     );
   });
+};
+
+function App(props) {
+  const totalNum = props.data.length;
+  const up = [...props.data].sort((a, b) => a.increase_rt - b.increase_rt);
+  const rail = [...props.data].sort((a, b) => b.increase_rt - a.increase_rt);
+  const ratio = [...props.data].sort((a, b) => b.volume - a.volume);
+  const premium_rt = [...props.data].sort(
+    (a, b) => a.premium_rt - b.premium_rt,
+  );
+  const dblow = [...props.data].sort((a, b) => a.dblow - b.dblow);
+  const riseNum = props.data.filter((item) => item.increase_rt > 0).length;
+  const downNum = props.data.filter((item) => item.increase_rt < 0).length;
 
   return (
     <>
-      <div
-        style={{
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            position: 'relative',
-          }}
-        >
-          {rangeDownNum.reverse().map((item) => (
-            <div
-              style={{
-                width: item.perent + '%',
-                height: 8,
-                border: '1px solid green',
-              }}
-            ></div>
-          ))}
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            position: 'relative',
-          }}
-        >
-          {rangeRiseNum.map((item) => (
-            <div
-              style={{
-                width: item.perent + '%',
-                height: 8,
-                border: '1px solid red',
-              }}
-            ></div>
-          ))}
-        </div>
-      </div>
       <div
         style={{
           display: 'flex',
@@ -193,8 +161,138 @@ function App(props) {
           alignItems: 'center',
         }}
       >
-        {b}
+        <RangeChart
+          data={props.data}
+          totalNum={totalNum}
+          rangeData={ranges}
+          field="increase_rt"
+        />
       </div>
+      。
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <RangeChart
+          data={props.data}
+          totalNum={totalNum}
+          rangeData={rangePrice}
+          field="price"
+        />
+      </div>
+      <Flex>
+        <FlexItem>
+          <div>跌榜</div>
+          <Table dataSource={up} columns={columns} />
+        </FlexItem>
+        <FlexItem>
+          <div>涨榜</div>
+          <Table dataSource={rail} columns={columns} />
+        </FlexItem>
+        <FlexItem>
+          <div>换手率</div>
+          <Table
+            dataSource={ratio}
+            columns={[
+              {
+                title: '代码',
+                dataIndex: 'bond_id',
+              },
+              {
+                title: '名称',
+                dataIndex: 'bond_nm',
+              },
+              {
+                title: '现价',
+                dataIndex: 'price',
+              },
+              {
+                title: '涨跌幅',
+                dataIndex: 'increase_rt',
+                render: (text) => (
+                  <span className={Number(text) > 0 ? 'up' : 'down'}>
+                    {text}%
+                  </span>
+                ),
+              },
+              {
+                title: '换手率',
+                dataIndex: 'turnover_rt',
+              },
+            ]}
+          />
+        </FlexItem>
+
+        <FlexItem>
+          <div>溢价率</div>
+          <Table
+            dataSource={premium_rt}
+            columns={[
+              {
+                title: '代码',
+                dataIndex: 'bond_id',
+              },
+              {
+                title: '名称',
+                dataIndex: 'bond_nm',
+              },
+              {
+                title: '现价',
+                dataIndex: 'price',
+              },
+              {
+                title: '涨跌幅',
+                dataIndex: 'increase_rt',
+                render: (text) => (
+                  <span className={Number(text) > 0 ? 'up' : 'down'}>
+                    {text}%
+                  </span>
+                ),
+              },
+              {
+                title: '溢价率',
+                dataIndex: 'premium_rt',
+              },
+            ]}
+          />
+        </FlexItem>
+        <FlexItem>
+          <div>双低</div>
+          <Table
+            dataSource={dblow}
+            columns={[
+              {
+                title: '代码',
+                dataIndex: 'bond_id',
+              },
+              {
+                title: '名称',
+                dataIndex: 'bond_nm',
+              },
+              {
+                title: '现价',
+                dataIndex: 'price',
+              },
+              {
+                title: '涨跌幅',
+                dataIndex: 'increase_rt',
+                render: (text) => (
+                  <span className={Number(text) > 0 ? 'up' : 'down'}>
+                    {text}%
+                  </span>
+                ),
+              },
+              {
+                title: '双低',
+                dataIndex: 'dblow',
+              },
+            ]}
+          />
+        </FlexItem>
+      </Flex>
     </>
   );
 }
