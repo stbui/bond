@@ -110,7 +110,7 @@ function App(props) {
   const totalNum = props.data.length;
   const up = [...props.data].sort((a, b) => a.increase_rt - b.increase_rt);
   const rail = [...props.data].sort((a, b) => b.increase_rt - a.increase_rt);
-  const ratio = [...props.data].sort((a, b) => b.volume - a.volume);
+  const ratio = [...props.data].sort((a, b) => b.turnover_rt - a.turnover_rt);
   const premium_rt = [...props.data].sort(
     (a, b) => a.premium_rt - b.premium_rt,
   );
