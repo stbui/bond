@@ -23,18 +23,6 @@ const columns = [
       <span className={Number(text) > 0 ? 'up' : 'down'}>{text}%</span>
     ),
   },
-  {
-    title: '换手率',
-    dataIndex: 'turnover_rt',
-  },
-  {
-    title: '溢价率',
-    dataIndex: 'premium_rt',
-  },
-  {
-    title: '双低',
-    dataIndex: 'dblow',
-  },
 ];
 
 const calcBK = (data) => {
@@ -69,12 +57,12 @@ const Item = ({ data, name, index }) => {
 };
 
 export default (props) => (
-  <>
+  <div style={{ display: 'flex' }}>
     {list.map((c, index) => {
       if (c.level === 1) {
         return <Item key={index} data={props.data} name={c.nm} index={c.val} />;
       }
       return null;
     })}
-  </>
+  </div>
 );
