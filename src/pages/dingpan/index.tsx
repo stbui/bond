@@ -7,6 +7,9 @@ const columns = [
   {
     title: '代码',
     dataIndex: 'bond_id',
+    render: (text) => {
+      return <a href={`http://treeid/code_${text}`}>{text}</a>;
+    },
   },
   {
     title: '名称',
