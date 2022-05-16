@@ -1,23 +1,34 @@
 import { useEffect, useState } from 'react';
 
-const currentDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+const dataCache: any = {};
 
-const date =
-  new URLSearchParams(window.location.search).get('date') || currentDate;
-
-function useJsl() {
+function useJsl(date) {
   const [state, setState] = useState({ data: [], loading: true });
 
   useEffect(() => {
+    if (dataCache[date] && dataCache[date].cacheTime > new Date().getTime()) {
+      setState({
+        data: dataCache[date].data,
+        loading: false,
+      });
+
+      return;
+    }
+
     fetch(`/data.${date}.json`)
       .then((res) => res.json())
       .then(({ data }: any) => {
+        dataCache[date] = {
+          cacheTime: new Date().getTime() + 60 * 1000,
+          data: data,
+        };
+
         setState({
           data: data,
           loading: false,
         });
       });
-  }, []);
+  }, [date]);
 
   return state;
 }

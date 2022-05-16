@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import FilterTag from './components';
 
 function App() {
-  return <>1</>;
+  return (
+    <>
+      <FilterTag />
+    </>
+  );
 }
 
 export default App;

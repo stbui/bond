@@ -1,7 +1,6 @@
-import React from 'react';
 import Table from '@/components/table';
 import { Flex, FlexItem } from '@/components/flex';
-import Cate from './cate';
+import TrendPrice from './components/trend_price';
 
 const columns = [
   {
@@ -50,7 +49,7 @@ const Bar = ({ percent, rise, children }) => {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
-        height: 150,
+        height: 400,
       }}
     >
       <div
@@ -82,7 +81,7 @@ const rangePrice = [
   [500, 800],
 ];
 
-const RangeChart = ({ rangeData, data, totalNum, field }) => {
+const RangeChart = ({ rangeData, data, totalNum, field }: any) => {
   return rangeData.map((range, key) => {
     const res = data.filter(
       (item) => item[field] >= range[0] && item[field] < range[1],
@@ -91,7 +90,7 @@ const RangeChart = ({ rangeData, data, totalNum, field }) => {
     const rangeNum = res.length;
     let r = (rangeNum / totalNum) * 100;
 
-    r = r > 0 ? r * 5 : r;
+    r = r > 0 ? r * 10 : r;
 
     return (
       <>
@@ -123,6 +122,10 @@ function App(props) {
 
   return (
     <>
+      <div>价格区间</div>
+      <TrendPrice type="price" />
+      <div>涨幅区间</div>
+      <TrendPrice type="increase" />
       <div
         style={{
           display: 'flex',
@@ -157,6 +160,7 @@ function App(props) {
           }}
         ></div>
       </div>
+      {/* 涨跌数量 */}
       <div
         style={{
           display: 'flex',
@@ -171,7 +175,7 @@ function App(props) {
           field="increase_rt"
         />
       </div>
-      。
+      {/* 价格区间 */}
       <div
         style={{
           display: 'flex',
@@ -186,6 +190,7 @@ function App(props) {
           field="price"
         />
       </div>
+
       <Flex>
         <FlexItem>
           <div>跌榜</div>

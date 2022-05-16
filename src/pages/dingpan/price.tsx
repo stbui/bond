@@ -51,19 +51,22 @@ const calcBK = (data) => {
 };
 
 const Item = ({ data, min, max }) => {
-  const newDate = data
-    .filter((item) => item.price > min && item.price < max)
-    .sort((a, b) => b.increase_rt - a.increase_rt);
+  const newDate = data.filter((item) => item.price > min && item.price < max);
+  const asc = newDate.sort((a, b) => b.increase_rt - a.increase_rt);
+  const desc = [...newDate].sort((a, b) => a.increase_rt - b.increase_rt);
 
   let sum = calcBK(newDate);
 
   return (
     <FlexItem>
-      <div style={{ fontSize: 18 }}>
+      <div style={{ paddingTop: 64 }} id={min + max}>
         {min}~{max}({newDate.length})
         <span style={{ color: sum > 0 ? 'red' : 'green' }}>{sum}%</span>
       </div>
-      <Table dataSource={newDate} columns={columns} />
+      <div style={{ display: 'flex' }}>
+        <Table dataSource={asc} columns={columns} />
+        <Table dataSource={desc} columns={columns} />
+      </div>
     </FlexItem>
   );
 };
@@ -82,6 +85,17 @@ const rangePrice = [
 
 export default (props) => (
   <>
+    <div
+      className="nav-column"
+      style={{ position: 'sticky', top: 24, background: '#fff' }}
+    >
+      价格：
+      {rangePrice.map((item) => (
+        <a href={`#${item[0] + item[1]}`} className="nav-column-item">
+          {item[0]}-{item[1]}
+        </a>
+      ))}
+    </div>
     {rangePrice.map((range, index) => {
       return (
         <Item key={index} data={props.data} min={range[0]} max={range[1]} />
