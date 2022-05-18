@@ -5,8 +5,8 @@ const APP_ROOT = process.cwd();
 const PRICE = path.join(APP_ROOT, './public/price_trend.json')
 
 
-const starTime = 20220401
-const endTime = 20220429
+const starTime = 20220501
+const endTime = 20220518
 
 
 const rangePrice = [
