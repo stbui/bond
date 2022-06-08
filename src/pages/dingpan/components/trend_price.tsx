@@ -18,7 +18,6 @@ const Chart = ({ data }) => {
               lineDash: [4, 2],
             },
           },
-          alternateColor: 'rgba(0,0,0,0.05)',
         },
       },
       yAxis: {
@@ -29,7 +28,6 @@ const Chart = ({ data }) => {
               lineDash: [4, 2],
             },
           },
-          alternateColor: 'rgba(0,0,0,0.05)',
         },
         tickInterval: 10,
       },

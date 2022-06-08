@@ -54,7 +54,7 @@ const Bar = ({ percent, rise, children }) => {
     >
       <div
         style={{
-          width: 40,
+          width: 30,
           height: percent,
           background: rise > 0 ? '#f00' : 'green',
         }}
@@ -93,20 +93,55 @@ const RangeChart = ({ rangeData, data, totalNum, field }: any) => {
     r = r > 0 ? r * 10 : r;
 
     return (
-      <>
-        <div key={key} style={{ width: 80, textAlign: 'center' }}>
-          <div>
-            {range[0]} ~ {range[1]}
-          </div>
-
-          <Bar percent={r} rise={range[1]}>
-            {rangeNum}
-          </Bar>
+      <div key={key} style={{ width: 70, textAlign: 'center' }}>
+        <div style={{ fontSize: 12 }}>
+          {range[0]} ~ {range[1]}
         </div>
-      </>
+
+        <Bar percent={r} rise={range[1]}>
+          {rangeNum}
+        </Bar>
+      </div>
     );
   });
 };
+
+const BarRival = ({ leftNum, rightNum, totalNum }) => (
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+    }}
+  >
+    <span style={{ color: 'green' }}>{leftNum}</span>
+    <div
+      style={{
+        width: (leftNum / totalNum) * 100 + '%',
+        height: 8,
+        background: -1 > 0 ? '#f00' : 'green',
+      }}
+    ></div>
+    <div
+      style={{
+        width: (rightNum / totalNum) * 100 + '%',
+        height: 8,
+        background: 1 > 0 ? '#f00' : 'green',
+      }}
+    ></div>
+    <span style={{ color: 'red' }}>{rightNum}</span>
+    <div
+      style={{
+        width: 2,
+        height: 8,
+        background: '#fff',
+        position: 'absolute',
+        left: '50%',
+      }}
+    ></div>
+  </div>
+);
 
 function App(props) {
   const totalNum = props.data.length;
@@ -122,73 +157,50 @@ function App(props) {
 
   return (
     <>
-      <div>价格区间</div>
+      {/* <div>价格区间</div>
       <TrendPrice type="price" />
       <div>涨幅区间</div>
-      <TrendPrice type="increase" />
+      <TrendPrice type="increase" /> */}
+
       <div
         style={{
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
         }}
       >
-        <span style={{ color: 'green' }}>{downNum}</span>
+        <div style={{ width: '50%' }}>
+          <BarRival leftNum={downNum} rightNum={riseNum} totalNum={totalNum} />
+          {/* 涨跌数量 */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <RangeChart
+              data={props.data}
+              totalNum={totalNum}
+              rangeData={ranges}
+              field="increase_rt"
+            />
+          </div>
+          {/* 价格区间 */}
+        </div>
+
         <div
           style={{
-            width: (downNum / totalNum) * 100 + '%',
-            height: 8,
-            background: -1 > 0 ? '#f00' : 'green',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
-        ></div>
-        <div
-          style={{
-            width: (riseNum / totalNum) * 100 + '%',
-            height: 8,
-            background: 1 > 0 ? '#f00' : 'green',
-          }}
-        ></div>
-        <span style={{ color: 'red' }}>{riseNum}</span>
-        <div
-          style={{
-            width: 2,
-            height: 8,
-            background: '#fff',
-            position: 'absolute',
-            left: '50%',
-          }}
-        ></div>
-      </div>
-      {/* 涨跌数量 */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <RangeChart
-          data={props.data}
-          totalNum={totalNum}
-          rangeData={ranges}
-          field="increase_rt"
-        />
-      </div>
-      {/* 价格区间 */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <RangeChart
-          data={props.data}
-          totalNum={totalNum}
-          rangeData={rangePrice}
-          field="price"
-        />
+        >
+          <RangeChart
+            data={props.data}
+            totalNum={totalNum}
+            rangeData={rangePrice}
+            field="price"
+          />
+        </div>
       </div>
 
       <Flex>
