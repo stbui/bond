@@ -282,3 +282,16 @@ https://xueqiu.com/stock/forchartk/stocklist.json?symbol=代码&period=1day&type
 注意访问下面的网址前要先点击https://xueqiu.com/，进入一次官网，然后在http头中才能记录你的数据，然后才能通过下面的网址获取数据。
 
 https://xueqiu.com/stock/forchartk/stocklist.json?symbol=SH600756&period=1day&type=before&begin=1478620800000&end=1510126200000&_=1510126200000
+
+http://qt.gtimg.cn/q=sh600000
+
+http://qt.gtimg.cn/q=ff_sh600519
+
+http://qt.gtimg.cn/q=s_pksh600519
+
+https://efinance.readthedocs.io/en/latest/
+
+https://github.com/Micro-sheep/efinance
+
+
+https://github.com/shidenggui/easytrader

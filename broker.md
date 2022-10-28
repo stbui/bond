@@ -40,6 +40,8 @@
 
 # 行情k图
 - [https://xuangubao.cn/tools/chart-widget/ashares/110051.SS](https://xuangubao.cn/tools/chart-widget/ashares/110051.SS)
+- http://quote.eastmoney.com/basic/full.html?mcid=1.600516
+- https://finance.sina.com.cn/h5charts/tchart.html?symbol=sh600516&date=2022-05-27&indicator=tvol
 
 # 可转债行情
 - [https://ww2.ezhai.net.cn/](https://ww2.ezhai.net.cn/)
@@ -65,6 +67,16 @@
 # 接口
 - https://w.sinajs.cn/etag.php?_=1639153280222&list=sz000792
 - https://qt.gtimg.cn/q=sh000001
+- https://xueqiu.com/v4/stock/quote.json?code=02318,01211,sh600000
+- 日内实时盘口（JSON）：http://api.money.126.net/data/feed/1000002,1000001,1000881,0601398,money.api
+- 历史成交数据（CSV）：http://quotes.money.163.com/service/chddata.html?code=0601398&start=20000720&end=20150508
+- 财务指标（CSV）：http://quotes.money.163.com/service/zycwzb_601398.html?type=report
+- 资产负债表（CSV）：http://quotes.money.163.com/service/zcfzb_601398.html
+- 利润表（CSV）：http://quotes.money.163.com/service/lrb_601398.html
+- 现金流表（CSV）：http://quotes.money.163.com/service/xjllb_601398.html
+- 杜邦分析（HTML）：http://quotes.money.163.com/f10/dbfx_601398.html
+
+
 
 # 开源
 - [KLineChart](https://github.com/liihuu/KLineChart)
