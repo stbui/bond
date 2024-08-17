@@ -1,0 +1,25 @@
+name: cron
+
+on:
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@v1
+      - name: 'Run auto-run.sh'
+        run: bash ./auto-run.sh
+      - name: 'commit'
+        run: |
+          git config --local user.email "w431106@163.com" 
+          git config --local user.name "stbui"
+          git add .
+          git commit -m "update data"
+      - name: 'push'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
